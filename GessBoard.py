@@ -90,6 +90,9 @@ class GessBoard:
             if piece != " ":
                 pieces.append(piece)
 
+        if self._board[x][y] != " " and len(pieces) == 1:
+            return False
+
         # Check that stones in piece belong to the same player
         check = pieces[0]
         for piece in pieces:
