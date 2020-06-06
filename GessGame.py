@@ -32,6 +32,9 @@ class GessGame:
         #   2. Requested center positions are valid
         if not self._board.convert(start) and self._board.convert(end):
             return False
+        
+        if start == end:
+            return False
 
         #   3. Requested piece belongs to the player whose turn it is
         correct_turn = self._board.is_piece(start) == self._turn[0]
