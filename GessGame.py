@@ -30,7 +30,7 @@ class GessGame:
             return False
 
         #   2. Requested center positions are valid
-        if not self._board.convert(start) and self._board.convert(end):
+        if not self._board.convert(start) or not self._board.convert(end):
             return False
         
         if start == end:
