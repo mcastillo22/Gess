@@ -32,13 +32,24 @@ class GessBoard:
                 print(f" {char} ", end=" ")
             print()
 
+        def print_black(stone):
+            print(f" \033[1;40m{stone}\033[000000m ", end="|")
+
+        def print_white(stone):
+            print(f" \033[34;1;44m{stone}\033[000000m ", end="|")
+
         print()
         print_alpha()
         print("|---" * 20)
         for row in range(len(self._board) - 1, -1, -1):
             print("|", end="")
             for x in self._board[row]:
-                print(" " + x, end=" |")
+                if x == "B":
+                    print_black(x)
+                elif x == "W":
+                    print_white(x)
+                else:
+                    print(" " + x, end=" |")
             print(f" {row + 1}\n" + "|---" * 20)
         print_alpha()
 
