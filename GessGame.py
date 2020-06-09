@@ -7,7 +7,7 @@ class GessGame:
         self._game_state = "UNFINISHED"
         self._turn = "BLACK"
         self._board = GessBoard()
-        self._debug_move = False
+        self._debug_mode = False
 
     def resign_game(self):
         """Lets current player concede the game"""
@@ -77,7 +77,7 @@ class GessGame:
         # Pass turn and return true
         self.change_turn()
 
-        if self._debug_move:
+        if self._debug_mode:
             self.print_board()
 
         return True
@@ -102,4 +102,4 @@ class GessGame:
         self._board.print_board()
 
     def debug_mode(self):
-        self._debug_move = True
+        self._debug_mode = True
