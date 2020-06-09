@@ -101,6 +101,9 @@ class GessBoard:
             if piece != " ":
                 pieces.append(piece)
 
+        if not pieces:
+            return False
+
         if self._board[x][y] != " " and len(pieces) == 1:
             return False
 
