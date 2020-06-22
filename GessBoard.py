@@ -1,3 +1,5 @@
+from constants import *
+
 class GessBoard:
     def __init__(self):
         self._board = [[" " for x in range(20)] for y in range(20)]
@@ -85,10 +87,8 @@ class GessBoard:
         Determines if the piece at the given center is valid
         Returns the player whose piece it belongs to
         """
-        if not self.convert(center):
-            return False
 
-        x, y = self.convert(center)
+        x, y = center
 
         # Ensure piece is not out of bounds
         oob = [0, 19]
@@ -131,12 +131,10 @@ class GessBoard:
 
     def clear_edges(self):
         """Clears the edges of the board"""
-        for col in self._board[0]:
-            col = " "
-        for col in self._board[19]:
-            col = " "
-        for y in range(1, 19):
-            self._board[y][0], self._board[y][19] = " ", " "
+        for col in range(ARRAY-1):
+            self._board[0][col], self._board[19][col] = " ", " "
+        for row in range(1, 19):
+            self._board[row][0], self._board[row][19] = " ", " "
 
     def make_copy(self):
         """Makes a temporary copy of the current board and the stones' positions"""

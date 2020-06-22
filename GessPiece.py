@@ -66,6 +66,9 @@ class GessPiece:
         """Checks that the piece can move to the desired coordinates based on the piece stones"""
         direction, change = self.get_direction()
 
+        if not direction:
+            return False
+
         if self._piece[direction]["Stone"] == " ":
             return False
 

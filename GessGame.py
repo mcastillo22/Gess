@@ -11,13 +11,16 @@ class GessGame:
 
     def resign_game(self):
         """Lets current player concede the game"""
-        if self._turn == "white":
+        if self._turn == "WHITE":
             self._game_state = "BLACK_WON"
         else:
             self._game_state = "WHITE_WON"
 
     def get_player(self):
         return self._turn
+
+    def correct_turn(self, center):
+        return self._board.is_piece(center) == self._turn[0]
 
     def make_move(self, start, end):
         """
@@ -28,22 +31,18 @@ class GessGame:
         #   1. Game is unfinished
         if self._game_state != "UNFINISHED":
             return False
-
-        #   2. Requested center positions are valid
-        if not self._board.convert(start) or not self._board.convert(end):
-            return False
         
         if start == end:
             return False
 
         #   3. Requested piece belongs to the player whose turn it is
-        correct_turn = self._board.is_piece(start) == self._turn[0]
+        correct_turn = self.correct_turn(start)
         if not correct_turn:
             return False
 
         #   4. The requested movement is valid
-        x1, y1 = self._board.convert(start)
-        x2, y2 = self._board.convert(end)
+        x1, y1 = start
+        x2, y2 = end
 
         # If target movement is out of bounds, return False
         if x2 in [0, 19] or y2 in [0, 19]:
@@ -103,3 +102,6 @@ class GessGame:
 
     def debug_mode(self):
         self._debug_mode = True
+
+    def get_board(self):
+        return self._board.get_board()
