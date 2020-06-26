@@ -7,6 +7,7 @@ def setup_board(screen, player):
     draw_grid(screen)
     board_bg(screen)
     show_turn(screen, player)
+    show_new_game(screen)
 
 def load_image(image):
     return pygame.image.load(f'Images/{image}')
@@ -55,3 +56,7 @@ def show_winner(screen, player):
     else:
         winner = load_image('gr_wins.png')
     blit_image(screen, winner, (WINNER, WINNER))
+
+def show_new_game(screen):
+    new = load_image('play.png')
+    blit_image(screen, new, (NEW_GAME_X, TURN_HEIGHT))

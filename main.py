@@ -13,7 +13,7 @@ def main():
     SCREEN = pygame.display.set_mode(WINDOW_SIZE)
     pygame.display.set_caption(TITLE)
 
-    new_game = GessGame()
+    new_game = start_new_game()
     pos1, pos2, pos3 = None, None, None
     topx, topy = 0, 0
     highlight = False
@@ -74,6 +74,9 @@ def main():
                                 highlight = False
                                 pos1, pos2 = None, None
                     else:
+                        if check_new_game(mouse_x, mouse_y):
+                            new_game = start_new_game()
+
                         if confirm_move:
                             new_game.undo()
 
