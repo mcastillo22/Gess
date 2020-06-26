@@ -11,10 +11,10 @@ def main():
     pygame.init()
     clock = pygame.time.Clock()
     SCREEN = pygame.display.set_mode(WINDOW_SIZE)
-    pygame.display.set_caption('Gess Game')
+    pygame.display.set_caption(TITLE)
 
     new_game = GessGame()
-    pos1, pos2 = None, None
+    pos1, pos2, pos3 = None, None, None
     topx, topy = 0, 0
     highlight = False
 
@@ -30,7 +30,7 @@ def main():
 
         load_icons(SCREEN, gameboard)
 
-        if new_game.get_game_state() != 'UNFINISHED':
+        if new_game.get_game_state() != UNFINISHED:
             show_winner(SCREEN, player)
 
         clock.tick(60)
@@ -52,8 +52,17 @@ def main():
                     elif pos1 is not None:
                         pos2 = convert(topx, topy)
                         new_game.make_move(pos1, pos2)
-                        highlight = False
-                        pos1, pos2 = None, None
+
+                    elif pos1 is not None and pos2 is not None:
+                        pos3 = convert(topx, topy)
+                        if pos2 == pos3:
+                            highlight = False
+                            pos1, pos2, pos3 = None, None, None
+
+                        else:
+                            # undo
+                            pass
+
 
         pygame.display.update()
     

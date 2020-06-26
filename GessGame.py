@@ -1,22 +1,23 @@
 from GessPiece import GessPiece
 from GessBoard import GessBoard
+from constants import *
 
 
 class GessGame:
     """Gess Game Engine"""
     def __init__(self):
         """Initialize a new Game Object"""
-        self._game_state = "UNFINISHED"
-        self._turn = "BLACK"
+        self._game_state = UNFINISHED
+        self._turn = BLACK
         self._board = GessBoard()
         self._debug_mode = False
 
     def resign_game(self):
         """Lets current player concede the game"""
-        if self._turn == "WHITE":
-            self._game_state = "BLACK_WON"
+        if self._turn == WHITE:
+            self._game_state = BLACK_WON
         else:
-            self._game_state = "WHITE_WON"
+            self._game_state = WHITE_WON
 
     def get_player(self):
         """Return current player"""
@@ -33,7 +34,7 @@ class GessGame:
         """
         # Check move validity:
         #   1. Game is unfinished
-        if self._game_state != "UNFINISHED":
+        if self._game_state != UNFINISHED:
             return False
         
         if start == end:
@@ -86,16 +87,16 @@ class GessGame:
         return True
 
     def get_opponent(self):
-        if self._turn == "BLACK":
-            return "WHITE"
-        return "BLACK"
+        if self._turn == BLACK:
+            return WHITE
+        return BLACK
 
     def change_turn(self):
         """Updates whose turn it is"""
-        if self._turn == "BLACK":
-            self._turn = "WHITE"
+        if self._turn == BLACK:
+            self._turn = WHITE
         else:
-            self._turn = "BLACK"
+            self._turn = BLACK
 
     def get_game_state(self):
         """Returns game state: UNFINISHED, BLACK_WON, or WHITE_WON"""

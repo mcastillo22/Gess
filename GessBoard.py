@@ -20,19 +20,18 @@ class GessBoard:
 
         for key, item in init_black_arr.items():
             for i in item:
-                self._board[key][i] = "B"
+                self._board[key][i] = B
 
         for key, item in init_white_arr.items():
             for i in item:
-                self._board[key][i] = "W"
+                self._board[key][i] = W
 
     def print_board(self):
         """Prints board for CL"""
 
         def print_alpha():
-            alpha = "abcdefghijklmnopqrst"
             print(" ", end="")
-            for char in alpha:
+            for char in ALPHA:
                 print(f" {char} ", end=" ")
             print()
 
@@ -48,9 +47,9 @@ class GessBoard:
         for row in range(len(self._board) - 1, -1, -1):
             print("|", end="")
             for x in self._board[row]:
-                if x == "B":
+                if x == B:
                     print_black(x)
-                elif x == "W":
+                elif x == W:
                     print_white(x)
                 else:
                     print(" " + x, end=" |")
@@ -58,28 +57,26 @@ class GessBoard:
         print_alpha()
 
     def convert(self, square):
-        alpha = "abcdefghijklmnopqrst"
-
-        if square[0] not in alpha or int(square[1:]) > 20:
+        if square[0] not in ALPHA or int(square[1:]) > 20:
             return False
 
         row = int(square[1:]) - 1
-        col = alpha.index(square[0])
+        col = ALPHA.index(square[0])
 
         return row, col
 
     def get_footprint(self, x, y):
         """Gets 3x3 footprint of the board from the passed coordinates (x, y)"""
         footprint = {
-            "SW": (x - 1, y - 1),
-            "S": (x - 1, y),
-            "SE": (x - 1, y + 1),
-            "W": (x, y - 1),
-            "Center": (x, y),
-            "E": (x, y + 1),
-            "NW": (x + 1, y - 1),
-            "N": (x + 1, y),
-            "NE": (x + 1, y + 1)
+            SW: (x - 1, y - 1),
+            S: (x - 1, y),
+            SE: (x - 1, y + 1),
+            W: (x, y - 1),
+            CENTER: (x, y),
+            E: (x, y + 1),
+            NW: (x + 1, y - 1),
+            N: (x + 1, y),
+            NE: (x + 1, y + 1)
         }
 
         return footprint

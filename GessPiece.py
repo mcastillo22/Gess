@@ -1,3 +1,6 @@
+from constants import *
+
+
 class GessPiece:
     """Manipulates a 3x3 footprint piece on the gameboard"""
     def __init__(self, origin, target, board):
@@ -6,8 +9,8 @@ class GessPiece:
         self._board = board
         self._boardlist = board.get_board()
 
-        self._x1, self._y1 = self._origin["Center"]
-        self._x2, self._y2 = self._target["Center"]
+        self._x1, self._y1 = self._origin[CENTER]
+        self._x2, self._y2 = self._target[CENTER]
 
         self._piece = {}
         self.create_piece()
@@ -21,7 +24,7 @@ class GessPiece:
 
     def unlimited(self):
         """Returns Bool if the piece can move unlimited spaces or not"""
-        if self._piece["Center"]["Stone"] != " ":
+        if self._piece[CENTER]["Stone"] != " ":
             return True
         return False
 
@@ -45,15 +48,15 @@ class GessPiece:
         x_change, y_change = self._x2 - self._x1, self._y2 - self._y1
         compass = ""
         if x_change < 0:
-            compass = "S"
+            compass = S
         elif x_change > 0:
-            compass = "N"
+            compass = N
         if y_change < 0:
-            compass += "W"
+            compass += W
         elif y_change > 0:
-            compass += "E"
+            compass += E
 
-        if compass in ["NW", "SE", "NW", "NE"] and abs(x_change) != abs(y_change):
+        if compass in [NW, SE, NW, NE] and abs(x_change) != abs(y_change):
             compass = False
 
         if abs(x_change) == 0:
@@ -77,7 +80,7 @@ class GessPiece:
             return False
 
         positions = [p for p in self._origin.keys()]
-        positions.remove("Center")
+        positions.remove(CENTER)
 
         moves = [
             (self._x1 - change, self._y1 - change),
