@@ -1,8 +1,8 @@
 # Game colors
-SLEET = ( 79,  93, 115)
-HL    = (255, 255, 200)
-WHITE = (255, 255, 255)
-GREY  = (128, 128, 128)
+SLEET       = ( 79,  93, 115)
+HL          = (255, 255, 200)
+WHITECOLOR  = (255, 255, 255)
+GREY        = (128, 128, 128)
 
 # Coordinates
 WINDOW_SIZE = (700, 700)

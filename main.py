@@ -17,6 +17,7 @@ def main():
     pos1, pos2, pos3 = None, None, None
     topx, topy = 0, 0
     highlight = False
+    confirm = False
 
     running = True
 
@@ -25,8 +26,8 @@ def main():
         player = new_game.get_player()
         setup_board(SCREEN, player)
 
-        if highlight:
-            highlight_piece(SCREEN, topx, topy)
+        if highlight and (not_none(topx) and not_none(topy)):
+                highlight_piece(SCREEN, topx, topy)
 
         load_icons(SCREEN, gameboard)
 
@@ -43,26 +44,34 @@ def main():
                     mouse_x, mouse_y = event.pos
 
                     topx, topy = on_grid(mouse_x, mouse_y)
-                    in_board = topx is not None and topy is not None
+                    in_board = not_none(topx) and not_none(topy)
 
                     if pos1 is None and in_board:
                         pos1 = convert(topx, topy)
                         highlight = new_game.correct_turn(pos1)
 
-                    elif pos1 is not None:
-                        pos2 = convert(topx, topy)
-                        new_game.make_move(pos1, pos2)
-
-                    elif pos1 is not None and pos2 is not None:
+                    elif confirm and in_board:
                         pos3 = convert(topx, topy)
+
+                        # Click again to confirm move
                         if pos2 == pos3:
-                            highlight = False
-                            pos1, pos2, pos3 = None, None, None
+                            new_game.change_turn()
 
                         else:
-                            # undo
-                            pass
+                            new_game.undo()
+                        
+                        confirm = False
+                        highlight = False
+                        pos1, pos2, pos3 = None, None, None
 
+                    elif not_none(pos1) and in_board:
+                        pos2 = convert(topx, topy)
+
+                        if new_game.make_move(pos1, pos2):
+                            confirm = True
+                        else:
+                            highlight = False
+                            pos1, pos2 = None, None
 
         pygame.display.update()
     

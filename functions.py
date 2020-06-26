@@ -21,3 +21,8 @@ def highlight_piece(screen, x, y):
     piece.set_alpha(96)
     piece.fill(HL)
     screen.blit(piece, (x - SPACE+1, y - SPACE+1))
+
+def not_none(pos):
+    if pos is not None:
+        return True
+    return False

@@ -31,7 +31,7 @@ def load_icons(screen, gameboard):
 def board_bg(screen):
     bg = pygame.Surface((ARRAY*SPACE+1, ARRAY*SPACE+1))
     bg.set_alpha(64)
-    bg.fill(WHITE)
+    bg.fill(WHITECOLOR)
     screen.blit(bg, (X1, Y1))
 
 def draw_grid(screen):

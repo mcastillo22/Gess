@@ -78,9 +78,6 @@ class GessGame:
             self._game_state = self.get_player() + "_WON"
             return True
 
-        # Pass turn and return true
-        self.change_turn()
-
         if self._debug_mode:
             self.print_board()
 
@@ -112,3 +109,6 @@ class GessGame:
     def get_board(self):
         """Returns the board associated with game object"""
         return self._board.get_board()
+
+    def undo(self):
+        return self._board.undo_board()
