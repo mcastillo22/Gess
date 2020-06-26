@@ -17,7 +17,7 @@ def main():
     pos1, pos2, pos3 = None, None, None
     topx, topy = 0, 0
     highlight = False
-    confirm = False
+    confirm_move = False
 
     running = True
 
@@ -46,32 +46,40 @@ def main():
                     topx, topy = on_grid(mouse_x, mouse_y)
                     in_board = not_none(topx) and not_none(topy)
 
-                    if pos1 is None and in_board:
-                        pos1 = convert(topx, topy)
-                        highlight = new_game.correct_turn(pos1)
+                    if in_board:
+                        if pos1 is None:
+                            pos1 = convert(topx, topy)
+                            highlight = new_game.correct_turn(pos1)
 
-                    elif confirm and in_board:
-                        pos3 = convert(topx, topy)
+                        elif confirm_move:
+                            pos3 = convert(topx, topy)
 
-                        # Click again to confirm move
-                        if pos2 == pos3:
-                            new_game.change_turn()
+                            # Click again to confirm move
+                            if pos2 == pos3:
+                                new_game.change_turn()
 
-                        else:
+                            else:
+                                new_game.undo()
+                            
+                            confirm_move = False
+                            highlight = False
+                            pos1, pos2, pos3 = None, None, None
+
+                        elif not_none(pos1):
+                            pos2 = convert(topx, topy)
+
+                            if new_game.make_move(pos1, pos2):
+                                confirm_move = True
+                            else:
+                                highlight = False
+                                pos1, pos2 = None, None
+                    else:
+                        if confirm_move:
                             new_game.undo()
-                        
-                        confirm = False
+
+                        confirm_move = False
                         highlight = False
                         pos1, pos2, pos3 = None, None, None
-
-                    elif not_none(pos1) and in_board:
-                        pos2 = convert(topx, topy)
-
-                        if new_game.make_move(pos1, pos2):
-                            confirm = True
-                        else:
-                            highlight = False
-                            pos1, pos2 = None, None
 
         pygame.display.update()
     
