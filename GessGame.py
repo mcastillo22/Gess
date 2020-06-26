@@ -3,7 +3,9 @@ from GessBoard import GessBoard
 
 
 class GessGame:
+    """Gess Game Engine"""
     def __init__(self):
+        """Initialize a new Game Object"""
         self._game_state = "UNFINISHED"
         self._turn = "BLACK"
         self._board = GessBoard()
@@ -17,9 +19,11 @@ class GessGame:
             self._game_state = "WHITE_WON"
 
     def get_player(self):
+        """Return current player"""
         return self._turn
 
     def correct_turn(self, center):
+        """Returns Bool if selected piece belongs to the player whose turn it is"""
         return self._board.is_piece(center) == self._turn[0]
 
     def make_move(self, start, end):
@@ -98,10 +102,12 @@ class GessGame:
         return self._game_state
 
     def print_board(self):
+        """For CLI or debugging purposes, prints board on CL"""
         self._board.print_board()
 
     def debug_mode(self):
         self._debug_mode = True
 
     def get_board(self):
+        """Returns the board associated with game object"""
         return self._board.get_board()

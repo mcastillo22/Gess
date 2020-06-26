@@ -1,6 +1,7 @@
 import pygame
 from constants import *
 
+
 def setup_board(screen, player):
     screen_bg(screen)
     draw_grid(screen)

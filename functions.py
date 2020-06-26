@@ -2,6 +2,7 @@ import pygame, sys
 from pygame.locals import  *
 from constants import *
 
+
 def on_grid(x, y):
     """Checks that mouse has been clicked on an actual grid space on the gameboard"""
     for top_x in range(X1, (ARRAY+1)*SPACE, SPACE):

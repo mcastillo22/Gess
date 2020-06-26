@@ -1,4 +1,5 @@
 class GessPiece:
+    """Manipulates a 3x3 footprint piece on the gameboard"""
     def __init__(self, origin, target, board):
         self._origin = origin
         self._target = target
@@ -19,7 +20,7 @@ class GessPiece:
             self._piece[position]["Stone"] = self._boardlist[x][y]
 
     def unlimited(self):
-        """Returns if the piece can move unlimited spaces or not"""
+        """Returns Bool if the piece can move unlimited spaces or not"""
         if self._piece["Center"]["Stone"] != " ":
             return True
         return False

@@ -1,6 +1,8 @@
 from constants import *
 
+
 class GessBoard:
+    """Controls the board associated with the Gess Game"""
     def __init__(self):
         self._board = [[" " for x in range(20)] for y in range(20)]
         self._temp = None
@@ -25,7 +27,7 @@ class GessBoard:
                 self._board[key][i] = "W"
 
     def print_board(self):
-        """Prints board"""
+        """Prints board for CL"""
 
         def print_alpha():
             alpha = "abcdefghijklmnopqrst"
@@ -127,6 +129,7 @@ class GessBoard:
                     ring.append(self._board[space[0]][space[1]])
                 if ring == [player, player, player, player, " ", player, player, player, player]:
                     return True
+
         return False
 
     def clear_edges(self):
